@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    public function __invokebale()
+    public function __construct()
     {
-        Admin::firstOrCreate([
+        Admin::firstOrCreate(['username' => 'admin'], [
             'username' => 'admin',
-            'password' => bcrypt('admin'),
             'name' => 'admin',
+            'password' => bcrypt('admin'),
             'email' => 'admin@sibabe.app',
-            'phone' => '08123456789',
+            'phone' => '081234567890',
         ]);
     }
 
