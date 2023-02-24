@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->string('id_produk')->foreign('id_produk')->references('id')->on('products');
             $table->string('feedback');

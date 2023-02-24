@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index(): JsonResponse
     {
         return $this->success(
-            'success get all product',
+            'Succes get all products',
             Product::all(),
         );
     }
@@ -37,8 +37,8 @@ class ProductController extends Controller
 
         if (! $product) {
             return $this->error(
-                'failed to get product by id',
-                'product not found',
+                'Failed to get product by id',
+                'Product not found',
                 404
             );
         }
@@ -48,14 +48,14 @@ class ProductController extends Controller
         if (! $feedback) {
             return $this->error(
                 '',
-                'feedback not found',
+                'Feedback not found',
                 404
             );
         }
 
         return $this->success(
             $product,
-            'success get product'
+            'Success get product'
         );
     }
 
