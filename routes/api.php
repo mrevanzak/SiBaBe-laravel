@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -28,12 +29,22 @@ Route::group(['prefix' => 'customer'], function () {
     });
 
     Route::group(['prefix' => 'jwt', 'middleware' => 'auth:sanctum'], function () {
+        Route::get('get-user', function () {
+            return auth()->user();
+        });
         Route::controller(CustomerController::class)->group(function () {
             Route::get('/user', 'getUser');
         });
         Route::controller(ProductController::class)->group(function () {
             Route::get('/products', 'index');
             Route::get('/products/{id}', 'show');
+        });
+        Route::controller(CartController::class)->group(function () {
+            Route::get('/products/add/{id}', 'addToCart');
+            Route::get('/cart', 'index');
+            Route::get('/cart/plus/{id}', 'addQuantity');
+            Route::get('/cart/minus/{id}', 'minusQuantity');
+            Route::get('/cart/delete/{id}', 'delete');
         });
     });
 });
