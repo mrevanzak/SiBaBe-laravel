@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('price');
-            $table->string('stock');
+            $table->integer('price');
+            $table->integer('stock');
             $table->string('image');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

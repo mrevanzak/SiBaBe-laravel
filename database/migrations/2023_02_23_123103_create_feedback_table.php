@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
-            $table->string('id_produk')->foreign('id_produk')->references('id')->on('products');
+            $table->integer('id_produk')->foreign('id_produk')->references('id')->on('products');
             $table->string('feedback');
-            $table->string('rating');
+            $table->integer('rating');
         });
     }
 
