@@ -45,6 +45,7 @@ Route::group(['prefix' => 'customer'], function () {
             Route::get('/cart/plus/{id}', 'addQuantity');
             Route::get('/cart/minus/{id}', 'minusQuantity');
             Route::get('/cart/delete/{id}', 'delete');
+            Route::post('checkout/confirm', 'checkoutConfirm');
         });
     });
 });
