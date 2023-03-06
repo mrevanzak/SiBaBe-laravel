@@ -17,7 +17,9 @@ class OrderController extends Controller
         $orders = Order::all()->where('customer_username', auth()->user()->username)->sortByDesc('created_at')->values()->toArray();
 
         if (! $orders) {
-            return $this->error('Failed get history', 'Failed get history', 404);
+            return $this->success('Success get history', [
+                'order' => [],
+            ]);
         }
 
         return $this->success('Success get history', [
