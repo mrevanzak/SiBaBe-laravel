@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
+            $table->string('invoice')->unique();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->integer('cart_id')->foreign('cart_id')->references('id')->on('carts');

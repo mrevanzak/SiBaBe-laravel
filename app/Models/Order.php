@@ -10,12 +10,8 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-
-    public $incrementing = false;
-
     protected $fillable = [
-        'id',
+        'invoice',
         'customer_username',
         'total_price',
         'status',
@@ -30,7 +26,7 @@ class Order extends Model
         parent::boot();
 
         self::creating(function ($model) {
-            $model->id = IdGenerator::generate(['table' => 'orders', 'length' => 8, 'prefix' => 'P']);
+            $model->invoice = IdGenerator::generate(['table' => 'orders', 'field' => 'invoice', 'length' => 8, 'prefix' => 'P']);
         });
     }
 }

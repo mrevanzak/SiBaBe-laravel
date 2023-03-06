@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCart;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -161,47 +158,5 @@ class CartController extends Controller
         $cart->save();
 
         return $this->index('Success update cart');
-    }
-
-    public function checkoutConfirm(Request $request): JsonResponse
-    {
-        $validator = Validator::make($request->all(), [
-            'address' => 'required|string',
-            'courier' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error(
-                'Validation Error',
-                $validator->errors()->first(),
-                400
-            );
-        }
-
-        $cart = Cart::where('username', auth()->user()->username)
-            ->where('status', 'Belum Checkout')->first();
-        $productCart = ProductCart::where('cart_id', $cart->id)->get();
-
-        $order = Order::create([
-            'customer_username' => auth()->user()->username,
-            'cart_id' => $cart->id,
-            'address' => $request->address,
-            'courier' => $request->courier,
-            'total_price' => $cart->total_price,
-            'status' => 'Belum Dibayar',
-            'total_product' => count($productCart),
-        ]);
-
-        return $this->success(
-            'Success checkout',
-            [
-                'id' => $order->id,
-                'username' => $order->customer_username,
-                'address' => $order->address,
-                'courier' => $order->courier,
-                'totalPrice' => $order->total_price,
-                'status' => $order->status,
-            ]
-        );
     }
 }

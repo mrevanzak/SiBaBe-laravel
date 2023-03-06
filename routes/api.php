@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutControler;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +47,14 @@ Route::group(['prefix' => 'customer'], function () {
             Route::get('/cart/plus/{id}', 'addQuantity');
             Route::get('/cart/minus/{id}', 'minusQuantity');
             Route::get('/cart/delete/{id}', 'delete');
+        });
+        Route::controller(CheckoutControler::class)->group(function () {
             Route::post('checkout/confirm', 'checkoutConfirm');
+            Route::post('checkout/confirm/payment', 'payment');
+        });
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('/history', 'index');
+            Route::get('/history/{id}', 'show');
         });
     });
 });
