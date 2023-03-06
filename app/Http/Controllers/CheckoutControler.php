@@ -55,6 +55,7 @@ class CheckoutControler extends Controller
             'Success confirm checkout',
             [
                 'id' => $order->id,
+                'invoice' => $order->invoice,
                 'username' => $order->customer_username,
                 'address' => $order->address,
                 'courier' => $order->courier,
