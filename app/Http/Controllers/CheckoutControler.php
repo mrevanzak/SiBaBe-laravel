@@ -52,7 +52,7 @@ class CheckoutControler extends Controller
         $cart->save();
 
         return $this->success(
-            'Success checkout',
+            'Success confirm checkout',
             [
                 'id' => $order->id,
                 'username' => $order->customer_username,
