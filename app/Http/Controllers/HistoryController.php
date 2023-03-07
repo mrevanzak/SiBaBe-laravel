@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\ProductCart;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
