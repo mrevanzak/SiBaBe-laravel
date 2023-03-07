@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutControler;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,5 +67,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'jwt', 'middleware' => 'auth:sanctum'], function () {
         Route::resource('products', ProductController::class);
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('/orders', 'index');
+            Route::post('/orders/{id}', 'confirm');
+        });
     });
 });
