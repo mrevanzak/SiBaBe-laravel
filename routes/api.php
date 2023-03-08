@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutControler;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -56,6 +57,9 @@ Route::group(['prefix' => 'customer'], function () {
         Route::controller(HistoryController::class)->group(function () {
             Route::get('/history', 'index');
             Route::get('/history/{id}', 'show');
+        });
+        Route::controller(FeedbackController::class)->group(function () {
+            Route::post('/history/{historyId}/feedback/{productId}', 'store');
         });
     });
 });

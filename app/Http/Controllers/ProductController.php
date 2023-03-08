@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
-use App\Models\Feedback_Pemesanan;
+use App\Models\Feedback_Order;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,10 +18,10 @@ class ProductController extends Controller
     {
         $products = Product::all();
         foreach ($products as $product) {
-            $product->reviews = Feedback::all()->where('id_produk', $product->id);
+            $product->reviews = Feedback::all()->where('product_id', $product->id);
 
             foreach ($product->reviews as $review) {
-                $review->user = Feedback_Pemesanan::all()->where('id_feedback', $review->id)->first()->username;
+                $review->username = Feedback_Order::all()->where('feedback_id', $review->id)->first()->username;
             }
         }
 
