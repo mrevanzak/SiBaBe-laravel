@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCart;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -77,6 +78,11 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->validated_by = auth()->user()->username;
         $order->save();
+
+        Report::create([
+            'date' => now(),
+            'income' => $order->total_price,
+        ]);
 
         return $this->success('Success confirm order', $order);
     }

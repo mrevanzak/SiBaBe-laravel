@@ -8,6 +8,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,6 +75,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::controller(OrderController::class)->group(function () {
             Route::get('/orders', 'index');
             Route::post('/orders/{id}', 'confirm');
+        });
+        Route::controller(ReportController::class)->group(function () {
+            Route::get('/report/monthly', 'index');
+            Route::post('/production', 'store');
         });
     });
 });
